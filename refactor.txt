@@ -1,0 +1,3 @@
+5 cards refactored
+
+Smithy card - This card was made into a separate function. It was simple as it is only a fewl ines of code

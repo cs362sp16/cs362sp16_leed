@@ -1,0 +1,11 @@
+5 cards refactored
+
+adventurer card - its function is to reveal cards from the player's deck until 2 treasure cards are revealed. Discard the other revealed cards. The code was taken from the function cardEffect in the switch statement.
+
+smithy card - this card adds 3 cards to the player's hand. The code was refactored into a separate function with the gameState struct being passed into it, along with other necessary parameters, such as the current player.
+
+baron card - gives +1 buy. If an estate card is discarded, then +4 coins. Else obtain an estate card. The baron code was refactored in the same way as the previous cards. The game state was passed in along with other parameters. There was some repetition in the code for gaining an estate card, so that was refactored into its own function.
+
+mine card - trashes treasure card from current hand and gain a treasure card that costs up to or more than 3 coins. the mine card functionality was broken up into two separate functions. One function handles the validity of the move, if the player can actually play this card and the other function implements the core functionality of the actual card.
+
+ambassador card - reveal a card from your hand and return up to 2 copies of it from your hand to the supply. Then each player gains a copy of it. Similar to the mine card, the ambassador functionality was split into two separate functions. One function checks to see if the card can be played, for example the player has to have at least 1 card in their hand. The other function implements the action of moving the player's card to the supply and every player getting a copy of it. 

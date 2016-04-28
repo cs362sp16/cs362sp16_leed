@@ -1,0 +1,43 @@
+ASSERT FALSE PASSED: Duplicate card, should fail
+ASSERT FALSE PASSED: Test above max players allowed, should fail
+TEST SUCCESSFULLY COMPLETED
+File 'unittest1.c'
+Lines executed:91.67% of 24
+Creating 'unittest1.c.gcov'
+
+ASSERT FALSE PASSED: Test shuffle for 3rd player, should fail
+TEST SUCCESSFULLY COMPLETED
+File 'unittest2.c'
+Lines executed:91.30% of 23
+Creating 'unittest2.c.gcov'
+
+TEST SUCCESSFULLY COMPLETED
+File 'unittest3.c'
+Lines executed:88.89% of 18
+Creating 'unittest3.c.gcov'
+
+FAILED ASSERT: Score for invalid player 0, should fail
+File 'unittest4.c'
+Lines executed:95.24% of 21
+Creating 'unittest4.c.gcov'
+
+FAILED ASSERT: adventurer card should be replaced with a treasure card
+File 'cardtest1.c'
+Lines executed:95.24% of 21
+Creating 'cardtest1.c.gcov'
+
+TEST SUCCESSFULLY COMPLETED
+File 'cardtest1.c'
+Lines executed:95.24% of 21
+Creating 'cardtest1.c.gcov'
+
+TEST SUCCESSFULLY COMPLETED
+File 'cardtest1.c'
+Lines executed:95.24% of 21
+Creating 'cardtest1.c.gcov'
+
+TEST SUCCESSFULLY COMPLETED
+File 'cardtest1.c'
+Lines executed:95.24% of 21
+Creating 'cardtest1.c.gcov'
+

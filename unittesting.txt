@@ -1,0 +1,6 @@
+DISCUSS YOUR UNIT TESTING EFFORTS
+	The unit tests were created based off of the example unit test done in class. For any errors that were not caught, I implemented an assertFalse statement that prints out what the error is inside the unittestresults.out file.
+
+	For the non-card implementation unit tests, I tested the initializeGame, scoreFor, shuffle, and whoseTurn functions. The whoseTurn function was difficult to implement as it was hard to simulate a player turn (action, buy, and clean-up phase). The whoseTurn function returns 0 for player 1, which was one of the bugs I found. 
+
+	For the card implementation unit tests, I tested the adventurer, smithy, village, and great hall card. These cards involved adding cards and/or actions. The adventurer card was different as it gave a player 2 treasure card. In order to test these cards, I created an extra customHand function that gives the player the card that needs to be tested. Besides this extra function, the card unit tests were relatively easier to check as the number of cards in a player's hand and the actions only needed to be checked.

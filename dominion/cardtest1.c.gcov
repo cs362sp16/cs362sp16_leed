@@ -1,0 +1,45 @@
+        -:    0:Source:cardtest1.c
+        -:    0:Graph:cardtest1.gcno
+        -:    0:Data:cardtest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include "dominion.h"
+        -:    3:
+        -:    4:int fail = 0;
+        -:    5:
+        3:    6:void assertTrue(int n,char *msg){
+        3:    7:	if(n != 0){
+        1:    8:		printf("FAILED ASSERT: %s\n", msg);
+        1:    9:		fail = 1;
+        -:   10:	}
+        3:   11:}
+        -:   12:
+        1:   13:void checkAsserts(){
+        1:   14:	if(!fail){
+    #####:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        -:   16:	}
+        1:   17:}
+        -:   18:
+        -:   19:// Test for scoreFor function for each player
+        1:   20:int main(){
+        -:   21:	struct gameState g;
+        -:   22:	
+        1:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        1:   24:	int a = initializeGame(2, k, 4, &g);
+        1:   25:	assertTrue(a, "Initialize game");
+        -:   26:
+        -:   27:	// adventurer card = 7, player 0
+        1:   28:	a = customHand(0,&g,7);
+        1:   29:	int b = handCard(5, &g);
+        -:   30:
+        -:   31:	int temphand[10];
+        1:   32:	a = adventurerCardEffect(&g, 0, temphand);
+        1:   33:	assertTrue(a, "Testing adventurer card");
+        -:   34:	
+        1:   35:	int c = handCard(5, &g);
+        1:   36:	assertTrue(b == c, "adventurer card should be replaced with a treasure card");
+        -:   37:
+        1:   38:	checkAsserts();
+        1:   39:	return 0;
+        -:   40:}

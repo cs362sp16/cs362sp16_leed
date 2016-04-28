@@ -1,0 +1,8 @@
+BUGS FOUND IN UNIT TESTS
+	One major bug that I found by doing the unit tests on non-card implementations, was that the amount of players in initialize is not working properly. One of the parameters for a lot of the functions included which player I was referencing. I was able to initialize the game to 2 players, but was still able to pass in players 0,1,2 without breaking the code.
+
+	The previous bug also affected how the scores were calculated. The scoreFor function was also able to take players 0,1, and 2. The scores for player 1 and 2 were both 0, but player 0 had a random score of 2. In order to solve this issue, I created an assertFalse function to catch these errors.
+
+REPORT ON FINDINGS FOR CODE COVERAGE
+	For the most part I was able to the coverage percentages above 90%. For the bugs that I found, I implemented my own assertFalse function to display what the error was. The functions and cards that I tested were mostly correct. The cards that I wrote unit tests for was the adventurer, smithy, village, and great hall card. The cards all were able to correctly remove and add cards to a user's hand. The cards that I tested also correctly added actions to a user's turns. 
+	The code coverage went relatively well as none of the tests caught any segmentation faults and core dumps for any of the functions that I tested.

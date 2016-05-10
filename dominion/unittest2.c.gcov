@@ -1,46 +1,46 @@
         -:    0:Source:unittest2.c
         -:    0:Graph:unittest2.gcno
         -:    0:Data:unittest2.gcda
-        -:    0:Runs:1
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:#include <stdio.h>
         -:    2:#include "dominion.h"
         -:    3:
         -:    4:int fail = 0;
         -:    5:
-        1:    6:void assertFalse(int n, char *msg){
-        1:    7:	if(n != 0){
-        1:    8:		printf("ASSERT FALSE PASSED: %s\n", msg);
+        3:    6:void assertFalse(int n, char *msg){
+        3:    7:	if(n != 0){
+        3:    8:		printf("ASSERT FALSE PASSED: %s\n", msg);
         -:    9:	}
-        1:   10:}
+        3:   10:}
         -:   11:
-        2:   12:void assertTrue(int n,char *msg){
-        2:   13:	if(n != 0){
+        6:   12:void assertTrue(int n,char *msg){
+        6:   13:	if(n != 0){
     #####:   14:		printf("FAILED ASSERT: %s\n", msg);
     #####:   15:		fail = 1;
         -:   16:	}
-        2:   17:}
+        6:   17:}
         -:   18:
-        1:   19:void checkAsserts(){
-        1:   20:	if(!fail){
-        1:   21:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        3:   19:void checkAsserts(){
+        3:   20:	if(!fail){
+        3:   21:		printf("TEST SUCCESSFULLY COMPLETED\n");
         -:   22:	}
-        1:   23:}
+        3:   23:}
         -:   24:
         -:   25:// Unit Test for shuffle function
-        1:   26:int main(){
+        3:   26:int main(){
         -:   27:	struct gameState g;
         -:   28:	
-        1:   29:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
-        1:   30:	int a = initializeGame(2, k, 4, &g);
-        1:   31:	assertTrue(a, "Test for duplicates in kingdom cards in initializeGame()");
+        3:   29:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        3:   30:	int a = initializeGame(2, k, 4, &g);
+        3:   31:	assertTrue(a, "Test for duplicates in kingdom cards in initializeGame()");
         -:   32:	
-        1:   33:	a = shuffle(1,&g);
-        1:   34:	assertTrue(a, "Test shuffle for 1st player");
+        3:   33:	a = shuffle(1,&g);
+        3:   34:	assertTrue(a, "Test shuffle for 1st player");
         -:   35:
-        1:   36:	a = shuffle(3,&g);
-        1:   37:	assertFalse(a, "Test shuffle for 3rd player, should fail");
+        3:   36:	a = shuffle(3,&g);
+        3:   37:	assertFalse(a, "Test shuffle for 3rd player, should fail");
         -:   38:
-        1:   39:	checkAsserts();
-        1:   40:	return 0;
+        3:   39:	checkAsserts();
+        3:   40:	return 0;
         -:   41:}

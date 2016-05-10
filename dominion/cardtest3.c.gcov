@@ -1,0 +1,52 @@
+        -:    0:Source:cardtest3.c
+        -:    0:Graph:cardtest3.gcno
+        -:    0:Data:cardtest3.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include "dominion.h"
+        -:    3:
+        -:    4:int fail = 0;
+        -:    5:
+        6:    6:void assertTrue(int n,char *msg){
+        6:    7:	if(n == 0){
+    #####:    8:		printf("FAILED ASSERT: %s\n", msg);
+    #####:    9:		fail = 1;
+        -:   10:	}
+        6:   11:}
+        -:   12:
+        2:   13:void checkAsserts(){
+        2:   14:	if(!fail){
+        2:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        -:   16:	}
+        2:   17:}
+        -:   18:
+        -:   19:// Test for scoreFor function for each player
+        2:   20:int main(){
+        -:   21:	struct gameState g;
+        -:   22:	
+        2:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        2:   24:	int a = initializeGame(2, k, 4, &g);
+        2:   25:	assertTrue(a==0, "Initialize game");
+        -:   26:	
+        -:   27:	// initial cards are 5
+        2:   28:	int totalCard = numHandCards(&g);
+        -:   29:
+        -:   30:	// village card = 14, player 0
+        2:   31:	a = customHand(0,&g,14);
+        -:   32:
+        -:   33:	// total cards are 6
+        2:   34:	totalCard = numHandCards(&g);
+        -:   35:
+        -:   36:	// call cardEffect with random parameters
+        -:   37:	int temp[10];
+        2:   38:	a = cardEffect(14,1,2,3,&g,5,temp);
+        -:   39:	
+        2:   40:	totalCard = numHandCards(&g);
+        2:   41:	assertTrue(totalCard == 6, "village gets 1 card, should have 6 cards");
+        -:   42:		
+        2:   43:	assertTrue(g.numActions == 3, "Add 2 actions for a total of 3 moves");
+        -:   44:
+        2:   45:	checkAsserts();
+        2:   46:	return 0;
+        -:   47:}

@@ -1,39 +1,39 @@
         -:    0:Source:unittest3.c
         -:    0:Graph:unittest3.gcno
         -:    0:Data:unittest3.gcda
-        -:    0:Runs:1
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:#include <stdio.h>
         -:    2:#include "dominion.h"
         -:    3:
         -:    4:int fail = 0;
         -:    5:
-        2:    6:void assertTrue(int n,char *msg){
-        2:    7:	if(n != 0){
+        6:    6:void assertTrue(int n,char *msg){
+        6:    7:	if(n != 0){
     #####:    8:		printf("FAILED ASSERT: %s\n", msg);
     #####:    9:		fail = 1;
         -:   10:	}
-        2:   11:}
+        6:   11:}
         -:   12:
-        1:   13:void checkAsserts(){
-        1:   14:	if(!fail){
-        1:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        3:   13:void checkAsserts(){
+        3:   14:	if(!fail){
+        3:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
         -:   16:	}
-        1:   17:}
+        3:   17:}
         -:   18:
         -:   19:// Test for whoseTurn function
-        1:   20:int main(){
+        3:   20:int main(){
         -:   21:	struct gameState g;
         -:   22:	
-        1:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
-        1:   24:	int a = initializeGame(2, k, 4, &g);
+        3:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        3:   24:	int a = initializeGame(2, k, 4, &g);
         -:   25:
-        1:   26:	a = shuffle(1,&g);
-        1:   27:	assertTrue(a, "Testing shuffle");
+        3:   26:	a = shuffle(1,&g);
+        3:   27:	assertTrue(a, "Testing shuffle");
         -:   28:
-        1:   29:	a = whoseTurn(&g);
-        1:   30:	assertTrue(a, "Testing whose turn, first player indexed at 0\n");
+        3:   29:	a = whoseTurn(&g);
+        3:   30:	assertTrue(a, "Testing whose turn, first player indexed at 0\n");
         -:   31:
-        1:   32:	checkAsserts();
-        1:   33:	return 0;
+        3:   32:	checkAsserts();
+        3:   33:	return 0;
         -:   34:}

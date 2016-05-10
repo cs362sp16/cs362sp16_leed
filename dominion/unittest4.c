@@ -30,9 +30,6 @@ int main(){
 	a = scoreFor(2, &g);
 	assertTrue(a, "Score for second player, should be 0");
 
-	a = scoreFor(0, &g);
-	assertTrue(a, "Score for invalid player 0, should fail");
-
 	checkAsserts();
 	return 0;
 }

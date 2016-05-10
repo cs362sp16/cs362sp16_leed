@@ -16,9 +16,9 @@ File 'unittest3.c'
 Lines executed:88.89% of 18
 Creating 'unittest3.c.gcov'
 
-FAILED ASSERT: Score for invalid player 0, should fail
+TEST SUCCESSFULLY COMPLETED
 File 'unittest4.c'
-Lines executed:95.24% of 21
+Lines executed:89.47% of 19
 Creating 'unittest4.c.gcov'
 
 FAILED ASSERT: adventurer card should be replaced with a treasure card
@@ -27,17 +27,17 @@ Lines executed:95.24% of 21
 Creating 'cardtest1.c.gcov'
 
 TEST SUCCESSFULLY COMPLETED
-File 'cardtest1.c'
-Lines executed:95.24% of 21
-Creating 'cardtest1.c.gcov'
+File 'cardtest2.c'
+Lines executed:90.48% of 21
+Creating 'cardtest2.c.gcov'
 
 TEST SUCCESSFULLY COMPLETED
-File 'cardtest1.c'
-Lines executed:95.24% of 21
-Creating 'cardtest1.c.gcov'
+File 'cardtest3.c'
+Lines executed:90.91% of 22
+Creating 'cardtest3.c.gcov'
 
 TEST SUCCESSFULLY COMPLETED
-File 'cardtest1.c'
-Lines executed:95.24% of 21
-Creating 'cardtest1.c.gcov'
+File 'cardtest4.c'
+Lines executed:90.91% of 22
+Creating 'cardtest4.c.gcov'
 

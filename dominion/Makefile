@@ -51,13 +51,16 @@ unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2
 	cardtest1 >> unittestresults.out
 	gcov cardtest1.c >> unittestresults.out	
 	cardtest2 >> unittestresults.out
-	gcov cardtest1.c >> unittestresults.out	
+	gcov cardtest2.c >> unittestresults.out	
 	cardtest3 >> unittestresults.out
-	gcov cardtest1.c >> unittestresults.out	
+	gcov cardtest3.c >> unittestresults.out	
 	cardtest4 >> unittestresults.out
-	gcov cardtest1.c >> unittestresults.out	
+	gcov cardtest4.c >> unittestresults.out	
 
-all: playdom player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 unittestresults.out
+adventurercardtest: randomtestadventurer.c dominion.o
+	gcc -o adventurercardtest randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+
+all: playdom player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 unittestresults.out adventurercardtest
 
 clean:
 	rm -f *.o playdom.exe playdom test.exe test player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM *.out

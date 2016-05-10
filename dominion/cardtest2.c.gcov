@@ -1,48 +1,48 @@
         -:    0:Source:cardtest2.c
         -:    0:Graph:cardtest2.gcno
         -:    0:Data:cardtest2.gcda
-        -:    0:Runs:2
+        -:    0:Runs:1
         -:    0:Programs:1
         -:    1:#include <stdio.h>
         -:    2:#include "dominion.h"
         -:    3:
         -:    4:int fail = 0;
         -:    5:
-        4:    6:void assertTrue(int n,char *msg){
-        4:    7:	if(n == 0){
+        2:    6:void assertTrue(int n,char *msg){
+        2:    7:	if(n == 0){
     #####:    8:		printf("FAILED ASSERT: %s\n", msg);
     #####:    9:		fail = 1;
         -:   10:	}
-        4:   11:}
+        2:   11:}
         -:   12:
-        2:   13:void checkAsserts(){
-        2:   14:	if(!fail){
-        2:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        1:   13:void checkAsserts(){
+        1:   14:	if(!fail){
+        1:   15:		printf("TEST SUCCESSFULLY COMPLETED\n");
         -:   16:	}
-        2:   17:}
+        1:   17:}
         -:   18:
         -:   19:// Test for scoreFor function for each player
-        2:   20:int main(){
+        1:   20:int main(){
         -:   21:	struct gameState g;
         -:   22:	
-        2:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
-        2:   24:	int a = initializeGame(2, k, 4, &g);
-        2:   25:	assertTrue(a==0, "Initialize game");
+        1:   23:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        1:   24:	int a = initializeGame(2, k, 4, &g);
+        1:   25:	assertTrue(a==0, "Initialize game");
         -:   26:
         -:   27:	// initial cards are 5
-        2:   28:	int totalCard = numHandCards(&g);
+        1:   28:	int totalCard = numHandCards(&g);
         -:   29:
         -:   30:	// smithy card = 13, player 0
-        2:   31:	a = customHand(0,&g,13);
+        1:   31:	a = customHand(0,&g,13);
         -:   32:
         -:   33:	// total cards are 6
-        2:   34:	totalCard = numHandCards(&g);
+        1:   34:	totalCard = numHandCards(&g);
         -:   35:
         -:   36:	// smithy card should add 3 cards and take away the smithy card
-        2:   37:	a = smithyCardEffect(&g,0,5);
-        2:   38:	totalCard = numHandCards(&g);
-        2:   39:	assertTrue(totalCard == 8, "smithy adds 3 cards, should have 8 cards");
+        1:   37:	a = smithyCardEffect(&g,0,5);
+        1:   38:	totalCard = numHandCards(&g);
+        1:   39:	assertTrue(totalCard == 8, "smithy adds 3 cards, should have 8 cards");
         -:   40:	
-        2:   41:	checkAsserts();
-        2:   42:	return 0;
+        1:   41:	checkAsserts();
+        1:   42:	return 0;
         -:   43:}

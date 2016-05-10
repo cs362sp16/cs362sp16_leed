@@ -24,6 +24,7 @@ int main(){
 	int a = initializeGame(2, k, 4, &g);
 	assertTrue(a, "Initialize game");
 
+
 	// adventurer card = 7, player 0
 	a = customHand(0,&g,7);
 	int b = handCard(5, &g);

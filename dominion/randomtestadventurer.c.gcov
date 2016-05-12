@@ -9,113 +9,111 @@
         -:    4:#include "rngs.h"
         -:    5:#define MAX_TESTS 2000
         -:    6:int fail = 0;
-        -:    7:// return value check
-        -:    8:int error1 = 0;
-        -:    9:// deck count
-        -:   10:int error2 = 0;
-        -:   11:// discard count
-        -:   12:int error3 = 0;
-        -:   13:
-     6000:   14:int assertTrue(int n){
-     6000:   15:	if(n == 0){
-      116:   16:		fail = 1;
-      116:   17:		return 1;
-        -:   18:	}
-        -:   19:	else{
-     5884:   20:		return 0;
-        -:   21:	}
-        -:   22:}
-        -:   23:
-        1:   24:void checkAsserts(){
-        1:   25:	if(!fail){
-    #####:   26:		printf("TEST SUCCESSFULLY COMPLETED\n");
-        -:   27:	}
-        -:   28:	else{
-        1:   29:		if(error1 > 0){
-    #####:   30:			printf("FAILED FUNCTION RETURN VALUE\n");
-        -:   31:		}
-        1:   32:		if(error2 > 0){
-        1:   33:			printf("FAILED DECK COUNT\n");
-        -:   34:		}
-        1:   35:		if(error3 > 0){
-        1:   36:			printf("FAILED DISCARD COUNT\n");
-        -:   37:		}
-        -:   38:	}
-        1:   39:}
-        -:   40:
-     2000:   41:void checkAdventurerCard(struct gameState *g, int currentPlayer){
-        -:   42:	int returnValue, preDiscardCount, preDeckCount;
-        -:   43:
-     2000:   44:	int preNumCards = numHandCards(g);
-     2000:   45:	preDiscardCount = g->discardCount[currentPlayer];
-     2000:   46:	preDeckCount = g->deckCount[currentPlayer];
+        -:    7:// deck count
+        -:    8:int error2 = 0;
+        -:    9:// discard count
+        -:   10:int error3 = 0;
+        -:   11:
+     6000:   12:int assertTrue(int n){
+     6000:   13:	if(n == 0){
+        6:   14:		fail = 1;
+        6:   15:		return 1;
+        -:   16:	}
+        -:   17:	else{
+     5994:   18:		return 0;
+        -:   19:	}
+        -:   20:}
+        -:   21:
+        1:   22:void checkAsserts(){
+        1:   23:	if(!fail){
+    #####:   24:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        -:   25:	}
+        -:   26:	else{
+        1:   27:		if(error2 > 0){
+        1:   28:			printf("FAILED DECK COUNT: %d times\n",error2);
+        -:   29:		}
+        1:   30:		if(error3 > 0){
+        1:   31:			printf("FAILED DISCARD COUNT: %d times\n",error3);
+        -:   32:		}
+        -:   33:	}
+        1:   34:}
+        -:   35:
+     2000:   36:void checkAdventurerCard(struct gameState *g, int currentPlayer){
+        -:   37:	int returnValue, preDiscardCount, preDeckCount;
+        -:   38:
+     2000:   39:	int preNumCards = numHandCards(g);
+     2000:   40:	preDiscardCount = g->discardCount[currentPlayer];
+     2000:   41:	preDeckCount = g->deckCount[currentPlayer];
+        -:   42:
+     2000:   43:	returnValue = adventurerCardEffect(g, currentPlayer);
+        -:   44:
+        -:   45:	// Test return value of function
+     2000:   46:	assertTrue(!returnValue);
         -:   47:
-     2000:   48:	returnValue = adventurerCardEffect(g, currentPlayer);
-        -:   49:
-        -:   50:	// Test return value of function
-     2000:   51:	if(assertTrue(!returnValue)){
-    #####:   52:		error1++;
-        -:   53:	}
-        -:   54:
-        -:   55:	// check that 2 cards were picked up
-     2000:   56:	int postNumCards = numHandCards(g);
-     2000:   57:	if(assertTrue(preNumCards+2 == postNumCards)){
-       58:   58:		error2++;
+        -:   48:	// check that 2 cards were picked up
+     2000:   49:	int postNumCards = numHandCards(g);
+     2000:   50:	if(assertTrue(preNumCards+2 == postNumCards)){
+        3:   51:		error2++;
+        -:   52:	}
+        -:   53:
+     2000:   54:	int postDiscardCount = g->discardCount[currentPlayer];
+     2000:   55:	int postDeckCount = preDeckCount - g->deckCount[currentPlayer] - 2;
+        -:   56:
+     2000:   57:	if(assertTrue(postDiscardCount == (preDiscardCount + postDeckCount))){
+        3:   58:		error3++;
         -:   59:	}
-        -:   60:
-     2000:   61:	int postDiscardCount = g->discardCount[currentPlayer];
-     2000:   62:	int postDeckCount = preDeckCount - g->deckCount[currentPlayer] - 2;
-        -:   63:
-     2000:   64:	if(assertTrue(postDiscardCount == (preDiscardCount + postDeckCount))){
-       58:   65:		error3++;
-        -:   66:	}
-     2000:   67:}
-        -:   68:
-        2:   69:int main(int argc, char *argv[]){
-        2:   70:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
-        -:   71:	int i,j,n,p, players, seed;
-        -:   72:	struct gameState g;
-        2:   73:	if(argc < 2){
-        1:   74:		printf("Enter seed number in command line\n");
-        1:   75:		exit(0);
-        -:   76:	}
+     2000:   60:}
+        -:   61:
+        2:   62:int main(int argc, char *argv[]){
+        2:   63:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        -:   64:	int i,j,n,p, players, seed;
+        -:   65:	struct gameState g;
+        2:   66:	if(argc < 2){
+        1:   67:		printf("Enter seed number in command line\n");
+        1:   68:		exit(0);
+        -:   69:	}
+        -:   70:	else{
+        1:   71:		seed = atoi(argv[1]);
+        -:   72:	}
+        -:   73:
+        1:   74:	SelectStream(rand()%10 + 1);
+        -:   75:	//seed = rand()%10 + 1;
+        1:   76:	printf("Tesing adventurer card\n");
         -:   77:
-        -:   78:
-        1:   79:	SelectStream(rand()%10 + 1);
-        1:   80:	PutSeed((rand()%10) + 1);
-        1:   81:	seed = rand()%10 + 1;
-        1:   82:	printf("Tesing adventurer card\n");
-        -:   83:
-     2001:   84:	for(n = 0;n < MAX_TESTS; n++){
- 52602000:   85:		for(i=0;i<sizeof(struct gameState);i++){
- 52600000:   86:			((char*)&g)[i] = floor(Random() * 256);
-        -:   87:		}
-        -:   88:		// have 2-4 players
-     2000:   89:		players = rand() %3 + 2;
-        -:   90:
-     2000:   91:		initializeGame(players, k, seed, &g);
-        -:   92:
-        -:   93:		// set up game state
-     2000:   94:		p = rand() % players;
-     2000:   95:		g.whoseTurn = p;
-     2000:   96:		g.deckCount[p] = rand() % (MAX_DECK+1);
-   494075:   97:		for(j=0;j<g.deckCount[p];j++){
-   492075:   98:			g.deck[p][j] = rand() % treasure_map;
-        -:   99:		}
-     2000:  100:		g.discardCount[p] = floor(Random() * MAX_DECK);
-     5715:  101:		for(j=0;j < g.handCount[p];j++){
-     3715:  102:			g.discard[p][j] = rand() % treasure_map;
-        -:  103:		}
-     2000:  104:		g.handCount[p] = floor(Random() * MAX_HAND);
-     2000:  105:		g.hand[p][0] = adventurer;
-   396052:  106:		for(j=1;j < g.handCount[p];j++){
-   394052:  107:			g.hand[p][j] = rand() % treasure_map;
-        -:  108:		}
+     2001:   78:	for(n = 0;n < MAX_TESTS; n++){
+ 52602000:   79:		for(i=0;i<sizeof(struct gameState);i++){
+ 52600000:   80:			((char*)&g)[i] = floor(Random() * 256);
+        -:   81:		}
+        -:   82:		// have 2-4 players
+     2000:   83:		players = rand() %3 + 2;
+        -:   84:
+     2000:   85:		initializeGame(players, k, seed, &g);
+        -:   86:
+        -:   87:		// set up game state
+     2000:   88:		p = rand() % players;
+     2000:   89:		g.whoseTurn = p;
+     2000:   90:		g.deckCount[p] = rand() % (MAX_DECK+2);
+        -:   91:
+        -:   92:		// guarantee at least two treasure cards in deck
+     2000:   93:		g.deck[p][0] = gold;
+     2000:   94:		g.deck[p][1] = copper;
+   507969:   95:		for(j=2;j<g.deckCount[p];j++){
+   505969:   96:			g.deck[p][j] = rand() % treasure_map;
+        -:   97:		}
+     2000:   98:		g.discardCount[p] = floor(Random() * MAX_DECK);
+     5470:   99:		for(j=0;j < g.handCount[p];j++){
+     3470:  100:			g.discard[p][j] = rand() % treasure_map;
+        -:  101:		}
+     2000:  102:		g.handCount[p] = floor(Random() * MAX_HAND);
+     2000:  103:		g.hand[p][0] = adventurer;
+   696641:  104:		for(j=1;j < g.handCount[p];j++){
+   694641:  105:			g.hand[p][j] = rand() % treasure_map;
+        -:  106:		}
+        -:  107:
+     2000:  108:		checkAdventurerCard(&g,p);
         -:  109:
-     2000:  110:		checkAdventurerCard(&g,p);
-        -:  111:
-        -:  112:	}
-        1:  113:	checkAsserts();
-        1:  114:	printf("COMPLETED RANDOM TESTING\n");
-        1:  115:	return 0;
-        -:  116:}
+        -:  110:	}
+        1:  111:	checkAsserts();
+        1:  112:	printf("COMPLETED RANDOM TESTING\n");
+        1:  113:	return 0;
+        -:  114:}

@@ -1,0 +1,104 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <time.h>
+        -:    3:#include "dominion.h"
+        -:    4:#include "rngs.h"
+        -:    5:#define MAX_TESTS 2000
+        -:    6:int fail = 0;
+        -:    7:
+     6000:    8:void assertTrue(int n){
+     6000:    9:	if(n == 0){
+    #####:   10:		fail = 1;
+        -:   11:	}
+     6000:   12:}
+        -:   13:
+        1:   14:void checkAsserts(){
+        1:   15:	if(!fail){
+        1:   16:		printf("TEST SUCCESSFULLY COMPLETED\n");
+        -:   17:	}
+        1:   18:}
+        -:   19:
+     2000:   20:void checkSmithyCard(struct gameState *g, int currentPlayer){
+        -:   21:	int returnValue, preDeckCount;
+        -:   22:
+     2000:   23:	int preNumCards = numHandCards(g);
+     2000:   24:	preDeckCount = g->deckCount[currentPlayer];
+        -:   25:
+        -:   26:	// error checking for a deck size less than 3
+     2000:   27:	if(preDeckCount < 3){
+        8:   28:		g->deckCount[currentPlayer] += 3;
+        8:   29:		preDeckCount = g->deckCount[currentPlayer];
+        -:   30:	}
+        -:   31:
+     2000:   32:	returnValue = smithyCardEffect(g, currentPlayer, 0);
+        -:   33:
+        -:   34:	// Test return value of function
+     2000:   35:	assertTrue(!returnValue);
+        -:   36:
+        -:   37:	// check that 3 cards were picked up and smithy card was discarded
+     2000:   38:	int postNumCards = numHandCards(g);
+     2000:   39:	assertTrue(preNumCards+2 == postNumCards);
+        -:   40:
+     2000:   41:	int postDeckCount = g->deckCount[currentPlayer];
+        -:   42:
+        -:   43:	// check that 3 cards were removed from the deck
+     2000:   44:	assertTrue(preDeckCount == (postDeckCount+3));
+     2000:   45:}
+        -:   46:
+        2:   47:int main(int argc, char *argv[]){
+        2:   48:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        -:   49:	int i,j,n,p, players, seed;
+        -:   50:	struct gameState g;
+        2:   51:	if(argc < 2){
+        1:   52:		printf("Enter seed number in command line\n");
+        1:   53:		exit(0);
+        -:   54:	}
+        -:   55:
+        -:   56:
+        1:   57:	SelectStream(rand()%10 + 1);
+        1:   58:	seed = rand()%10 + 1;
+        1:   59:	printf("RANDOM TESTING FOR SMITHY CARD\n");
+        -:   60:
+     2001:   61:	for(n = 0;n < MAX_TESTS; n++){
+ 52602000:   62:		for(i=0;i<sizeof(struct gameState);i++){
+ 52600000:   63:			((char*)&g)[i] = floor(Random() * 256);
+        -:   64:		}
+        -:   65:		// have 2-4 players
+     2000:   66:		players = rand() %3 + 2;
+        -:   67:
+     2000:   68:		initializeGame(players, k, seed, &g);
+        -:   69:
+        -:   70:		// set up game state
+     2000:   71:		p = rand() % players;
+     2000:   72:		g.whoseTurn = p;
+        -:   73:
+        -:   74:		//make at least 3 cards left in the user's deck
+     2000:   75:		g.deckCount[p] = rand() % (MAX_DECK+3);
+        -:   76:
+        -:   77:		// fill deck randomly
+   497125:   78:		for(j=0;j<g.deckCount[p];j++){
+   495125:   79:			g.deck[p][j] = rand() % treasure_map;
+        -:   80:		}
+     2000:   81:		g.discardCount[p] = floor(Random() * MAX_DECK);
+     5515:   82:		for(j=0;j < g.handCount[p];j++){
+     3515:   83:			g.discard[p][j] = rand() % treasure_map;
+        -:   84:		}
+     2000:   85:		g.handCount[p] = floor(Random() * MAX_HAND);
+        -:   86:
+        -:   87:		// give smithy card
+     2000:   88:		g.hand[p][0] = smithy;
+   634628:   89:		for(j=1;j < g.handCount[p];j++){
+   632628:   90:			g.hand[p][j] = rand() % treasure_map;
+        -:   91:		}
+        -:   92:
+     2000:   93:		checkSmithyCard(&g,p);
+        -:   94:	}
+        1:   95:	checkAsserts();
+        1:   96:	printf("COMPLETED RANDOM TESTING\n");
+        1:   97:	return 0;
+        -:   98:}
+        -:   99:

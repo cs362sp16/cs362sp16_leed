@@ -29,8 +29,7 @@ int main(){
 	a = customHand(0,&g,7);
 	int b = handCard(5, &g);
 
-	int temphand[10];
-	a = adventurerCardEffect(&g, 0, temphand);
+	a = adventurerCardEffect(&g, 0);
 	assertTrue(a, "Testing adventurer card");
 	
 	int c = handCard(5, &g);

@@ -82,7 +82,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 int smithyCardEffect(struct gameState *state, int currentPlayer, int handPos);
 
-int adventurerCardEffect(struct gameState *state, int currentPlayer, int *temphand);
+int adventurerCardEffect(struct gameState *state, int currentPlayer);
 
 int customHand(int player, struct gameState *state, int card);
 

@@ -8,12 +8,12 @@
         -:    3:
         -:    4:int fail = 0;
         -:    5:
-        3:    6:void assertTrue(int n,char *msg){
-        3:    7:	if(n != 0){
+        2:    6:void assertTrue(int n,char *msg){
+        2:    7:	if(n != 0){
     #####:    8:		printf("FAILED ASSERT: %s\n", msg);
     #####:    9:		fail = 1;
         -:   10:	}
-        3:   11:}
+        2:   11:}
         -:   12:
         1:   13:void checkAsserts(){
         1:   14:	if(!fail){
@@ -32,8 +32,8 @@
         1:   27:	a = scoreFor(1, &g);
         1:   28:	assertTrue(a, "Score for first player, should be 0");
         -:   29:
-        1:   30:	a = scoreFor(2, &g);
-        1:   31:	assertTrue(a, "Score for second player, should be 0");
+        -:   30:	//a = scoreFor(2, &g);
+        -:   31:	//assertTrue(a, "Score for second player, should be 0");
         -:   32:
         1:   33:	checkAsserts();
         1:   34:	return 0;

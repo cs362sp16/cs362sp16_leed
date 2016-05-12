@@ -1,4 +1,4 @@
-CFLAGS = -Wall -fpic -coverage -lm
+CFLAGS = -Wall -fpic -coverage -lm -w
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -58,7 +58,7 @@ unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2
 	gcov cardtest4.c >> unittestresults.out	
 
 randomtestadventurer.out: randomtestadventurer.c dominion.o
-	gcc -o adventurercardtest.out randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	gcc -o adventurercardtest.out randomtestadventurer.c dominion.o rngs.o -g -fprofile-arcs -ftest-coverage -Wall -fpic -coverage -lm -w
 
 all: playdom player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 unittestresults.out randomtestadventurer.out
 

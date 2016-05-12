@@ -18,7 +18,7 @@ Creating 'unittest3.c.gcov'
 
 TEST SUCCESSFULLY COMPLETED
 File 'unittest4.c'
-Lines executed:89.47% of 19
+Lines executed:88.24% of 17
 Creating 'unittest4.c.gcov'
 
 FAILED ASSERT: adventurer card should be replaced with a treasure card

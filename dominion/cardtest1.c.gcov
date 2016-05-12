@@ -34,13 +34,12 @@
         1:   29:	a = customHand(0,&g,7);
         1:   30:	int b = handCard(5, &g);
         -:   31:
-        -:   32:	int temphand[10];
-        1:   33:	a = adventurerCardEffect(&g, 0, temphand);
-        1:   34:	assertTrue(a, "Testing adventurer card");
-        -:   35:	
-        1:   36:	int c = handCard(5, &g);
-        1:   37:	assertTrue(b == c, "adventurer card should be replaced with a treasure card");
-        -:   38:
-        1:   39:	checkAsserts();
-        1:   40:	return 0;
-        -:   41:}
+        1:   32:	a = adventurerCardEffect(&g, 0);
+        1:   33:	assertTrue(a, "Testing adventurer card");
+        -:   34:	
+        1:   35:	int c = handCard(5, &g);
+        1:   36:	assertTrue(b == c, "adventurer card should be replaced with a treasure card");
+        -:   37:
+        1:   38:	checkAsserts();
+        1:   39:	return 0;
+        -:   40:}

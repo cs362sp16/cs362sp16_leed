@@ -1,7 +1,7 @@
         -:    0:Source:randomtestcard2.c
         -:    0:Graph:randomtestcard2.gcno
         -:    0:Data:randomtestcard2.gcda
-        -:    0:Runs:6
+        -:    0:Runs:2
         -:    0:Programs:1
         -:    1:#include <stdio.h>
         -:    2:#include <time.h>
@@ -9,93 +9,102 @@
         -:    4:#include "rngs.h"
         -:    5:#define MAX_TESTS 2000
         -:    6:int fail = 0;
-        -:    7:
-    24000:    8:void assertTrue(int n){
-    24000:    9:	if(n == 0){
-    12050:   10:		fail = 1;
-        -:   11:	}
-    24000:   12:}
-        -:   13:
-        3:   14:void checkAsserts(){
-        3:   15:	if(fail){
-        3:   16:		printf("FAILED TESTS DETECTED\n");
-        -:   17:	}
-        3:   18:}
-        -:   19:
-     6000:   20:void checkCouncilRoomCard(struct gameState *g, int currentPlayer){
-        -:   21:	int returnValue, preDeckCount, preNumBuys, postNumBuys;
-        -:   22:
-     6000:   23:	int preNumCards = numHandCards(g);
-     6000:   24:	preDeckCount = g->deckCount[currentPlayer];
-     6000:   25:	preNumBuys = g->numBuys;
+        -:    7:int cardDiscard = 0;
+        -:    8:
+     8000:    9:int assertTrue(int n){
+     8000:   10:	if(n == 0){
+        6:   11:		fail = 1;
+        6:   12:		return 1;
+        -:   13:	}
+     7994:   14:	return 0;
+        -:   15:}
+        -:   16:
+        1:   17:void checkAsserts(){
+        1:   18:	if(fail){
+        1:   19:		printf("FAILED TESTS DETECTED\n");
+        1:   20:		printf("FAILED DISCARD: %d times\n",cardDiscard);
+        -:   21:	}
+        1:   22:}
+        -:   23:
+     2000:   24:void checkVillageCard(struct gameState *g, int currentPlayer){
+        -:   25:	int returnValue, preDeckCount, preNumActions, postNumActions;
         -:   26:
-     6000:   27:	returnValue = cardEffect(council_room,0,0,0,g,0,0);
-        -:   28:
-        -:   29:	// Test return value of function
-     6000:   30:	assertTrue(!returnValue);
-        -:   31:
-        -:   32:	// check that 4 cards were picked up and smithy card was discarded
-     6000:   33:	int postNumCards = numHandCards(g);
-     6000:   34:	assertTrue(preNumCards+4 == postNumCards);
+     2000:   27:	int preNumCards = numHandCards(g);
+     2000:   28:	preDeckCount = g->deckCount[currentPlayer];
+        -:   29:
+        -:   30:	// By default each player only gets 1 action per turn
+     2000:   31:	g->numActions = 1;
+     2000:   32:	preNumActions = g->numActions;
+        -:   33:	
+     2000:   34:	returnValue = cardEffect(village,0,0,0,g,0,0);
         -:   35:
-     6000:   36:	int postDeckCount = g->deckCount[currentPlayer];
-        -:   37:
-        -:   38:	// check that 3 cards were removed from the deck
-     6000:   39:	assertTrue(preDeckCount == (postDeckCount+4));
-        -:   40:
-     6000:   41:	postNumBuys = g->numBuys;
-     6000:   42:	assertTrue(preNumBuys == (postNumBuys+1));
-     6000:   43:}
+        -:   36:	// Test return value of function
+     2000:   37:	assertTrue(!returnValue);
+        -:   38:
+        -:   39:	// check that 1 card was picked up and village was discarded from hand
+     2000:   40:	int postNumCards = numHandCards(g);
+     2000:   41:	assertTrue(preNumCards == postNumCards);
+        -:   42:
+     2000:   43:	int postDeckCount = g->deckCount[currentPlayer];
         -:   44:
-        6:   45:int main(int argc, char *argv[]){
-        6:   46:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
-        -:   47:	int i,j,n,p, players, seed;
-        -:   48:	struct gameState g;	
-        6:   49:	if(argc < 2){
-        3:   50:		printf("Enter seed number in command line\n");
-        3:   51:		exit(0);
-        -:   52:	}
+        -:   45:	// check that 1 card was removed from the deck
+     2000:   46:	if(assertTrue(preDeckCount == (postDeckCount+1))){
+        6:   47:		cardDiscard++;
+        -:   48:	}
+        -:   49:
+     2000:   50:	postNumActions = g->numActions;
+     2000:   51:	assertTrue(preNumActions == (postNumActions-2));
+     2000:   52:}
         -:   53:
-        3:   54:	SelectStream(rand()%10 + 1);
-        3:   55:	seed = atoi(argv[1]);
-        3:   56:	printf("RANDOM TESTING FOR COUNCIL ROOM CARD\n");
-        -:   57:
-     6003:   58:	for(n = 0;n < MAX_TESTS; n++){
-157806000:   59:		for(i=0;i<sizeof(struct gameState);i++){
-157800000:   60:			((char*)&g)[i] = floor(Random() * 256);
-        -:   61:		}
-        -:   62:		// have 2-4 players
-     6000:   63:		players = rand() %3 + 2;
-        -:   64:
-     6000:   65:		initializeGame(players, k, seed, &g);
+        2:   54:int main(int argc, char *argv[]){
+        2:   55:	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,outpost,baron,tribute};
+        -:   56:	int i,j,n,p, players, seed;
+        -:   57:	struct gameState g;	
+        2:   58:	if(argc < 2){
+        1:   59:		printf("Enter seed number in command line\n");
+        1:   60:		exit(0);
+        -:   61:	}
+        -:   62:
+        1:   63:	SelectStream(rand()%10 + 1);
+        1:   64:	seed = atoi(argv[1]);
+        1:   65:	printf("RANDOM TESTING FOR VILLAGE CARD\n");
         -:   66:
-        -:   67:		// set up game state
-     6000:   68:		p = rand() % players;
-     6000:   69:		g.whoseTurn = p;
-        -:   70:
-        -:   71:		//make at least 4 cards left in the user's deck
-     6000:   72:		g.deckCount[p] = rand() % (MAX_DECK+4);
+     2001:   67:	for(n = 0;n < MAX_TESTS; n++){
+ 52602000:   68:		for(i=0;i<sizeof(struct gameState);i++){
+ 52600000:   69:			((char*)&g)[i] = floor(Random() * 256);
+        -:   70:		}
+        -:   71:		// have 2-4 players
+     2000:   72:		players = rand() %3 + 2;
         -:   73:
-        -:   74:		// fill deck randomly
-  1505817:   75:		for(j=0;j<g.deckCount[p];j++){
-  1499817:   76:			g.deck[p][j] = rand() % treasure_map;
-        -:   77:		}
-     6000:   78:		g.discardCount[p] = floor(Random() * MAX_DECK);
-    16770:   79:		for(j=0;j < g.handCount[p];j++){
-    10770:   80:			g.discard[p][j] = rand() % treasure_map;
-        -:   81:		}
-     6000:   82:		g.handCount[p] = floor(Random() * MAX_HAND);
-        -:   83:
-        -:   84:		// give smithy card
-     6000:   85:		g.hand[p][0] = council_room;
-  1663530:   86:		for(j=1;j < g.handCount[p];j++){
-  1657530:   87:			g.hand[p][j] = rand() % treasure_map;
-        -:   88:		}
-        -:   89:
-     6000:   90:		checkCouncilRoomCard(&g,p);
-        -:   91:	}
-        3:   92:	checkAsserts();
-        3:   93:	printf("COMPLETED RANDOM TESTING\n");
-        3:   94:	return 0;
-        -:   95:}
-        -:   96:
+     2000:   74:		initializeGame(players, k, seed, &g);
+        -:   75:
+        -:   76:		// set up game state
+     2000:   77:		p = rand() % players;
+     2000:   78:		g.whoseTurn = p;
+        -:   79:
+        -:   80:		//make at least 4 cards left in the user's deck
+     2000:   81:		g.deckCount[p] = rand() % (MAX_DECK+1);
+        -:   82:
+        -:   83:		// fill deck randomly
+   503603:   84:		for(j=0;j<g.deckCount[p];j++){
+   501603:   85:			g.deck[p][j] = rand() % treasure_map;
+        -:   86:		}
+     2000:   87:		g.discardCount[p] = floor(Random() * MAX_DECK);
+     5445:   88:		for(j=0;j < g.handCount[p];j++){
+     3445:   89:			g.discard[p][j] = rand() % treasure_map;
+        -:   90:		}
+     2000:   91:		g.handCount[p] = floor(Random() * MAX_HAND);
+        -:   92:
+        -:   93:		// give village
+     2000:   94:		g.hand[p][0] = village;
+   847884:   95:		for(j=1;j < g.handCount[p];j++){
+   845884:   96:			g.hand[p][j] = rand() % treasure_map;
+        -:   97:		}
+        -:   98:
+     2000:   99:		checkVillageCard(&g,p);
+        -:  100:	}
+        1:  101:	checkAsserts();
+        1:  102:	printf("COMPLETED RANDOM TESTING\n");
+        1:  103:	return 0;
+        -:  104:}
+        -:  105:

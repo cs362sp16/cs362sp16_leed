@@ -4,42 +4,51 @@
 #include "rngs.h"
 #define MAX_TESTS 2000
 int fail = 0;
+int cardDiscard = 0;
 
-void assertTrue(int n){
+int assertTrue(int n){
 	if(n == 0){
 		fail = 1;
+		return 1;
 	}
+	return 0;
 }
 
 void checkAsserts(){
 	if(fail){
 		printf("FAILED TESTS DETECTED\n");
+		printf("FAILED DISCARD: %d times\n",cardDiscard);
 	}
 }
 
-void checkCouncilRoomCard(struct gameState *g, int currentPlayer){
-	int returnValue, preDeckCount, preNumBuys, postNumBuys;
+void checkVillageCard(struct gameState *g, int currentPlayer){
+	int returnValue, preDeckCount, preNumActions, postNumActions;
 
 	int preNumCards = numHandCards(g);
 	preDeckCount = g->deckCount[currentPlayer];
-	preNumBuys = g->numBuys;
 
-	returnValue = cardEffect(council_room,0,0,0,g,0,0);
+	// By default each player only gets 1 action per turn
+	g->numActions = 1;
+	preNumActions = g->numActions;
+	
+	returnValue = cardEffect(village,0,0,0,g,0,0);
 
 	// Test return value of function
 	assertTrue(!returnValue);
 
-	// check that 4 cards were picked up and smithy card was discarded
+	// check that 1 card was picked up and village was discarded from hand
 	int postNumCards = numHandCards(g);
-	assertTrue(preNumCards+4 == postNumCards);
+	assertTrue(preNumCards == postNumCards);
 
 	int postDeckCount = g->deckCount[currentPlayer];
 
-	// check that 3 cards were removed from the deck
-	assertTrue(preDeckCount == (postDeckCount+4));
+	// check that 1 card was removed from the deck
+	if(assertTrue(preDeckCount == (postDeckCount+1))){
+		cardDiscard++;
+	}
 
-	postNumBuys = g->numBuys;
-	assertTrue(preNumBuys == (postNumBuys+1));
+	postNumActions = g->numActions;
+	assertTrue(preNumActions == (postNumActions-2));
 }
 
 int main(int argc, char *argv[]){
@@ -53,7 +62,7 @@ int main(int argc, char *argv[]){
 
 	SelectStream(rand()%10 + 1);
 	seed = atoi(argv[1]);
-	printf("RANDOM TESTING FOR COUNCIL ROOM CARD\n");
+	printf("RANDOM TESTING FOR VILLAGE CARD\n");
 
 	for(n = 0;n < MAX_TESTS; n++){
 		for(i=0;i<sizeof(struct gameState);i++){
@@ -69,7 +78,7 @@ int main(int argc, char *argv[]){
 		g.whoseTurn = p;
 
 		//make at least 4 cards left in the user's deck
-		g.deckCount[p] = rand() % (MAX_DECK+4);
+		g.deckCount[p] = rand() % (MAX_DECK+1);
 
 		// fill deck randomly
 		for(j=0;j<g.deckCount[p];j++){
@@ -81,13 +90,13 @@ int main(int argc, char *argv[]){
 		}
 		g.handCount[p] = floor(Random() * MAX_HAND);
 
-		// give smithy card
-		g.hand[p][0] = council_room;
+		// give village
+		g.hand[p][0] = village;
 		for(j=1;j < g.handCount[p];j++){
 			g.hand[p][j] = rand() % treasure_map;
 		}
 
-		checkCouncilRoomCard(&g,p);
+		checkVillageCard(&g,p);
 	}
 	checkAsserts();
 	printf("COMPLETED RANDOM TESTING\n");

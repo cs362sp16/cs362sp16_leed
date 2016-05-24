@@ -1,0 +1,6 @@
+*.dSYM
+*.o
+*.gcno
+*.gcda
+*.swp
+*.gcov

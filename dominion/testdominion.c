@@ -14,18 +14,7 @@ int main(int argc, char *argv[]){
 	struct gameState *state = newGame();
 
 	int k[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	int card;
-	int checkSame;
-
-	int players;
-	int seed;
-
-	int x;
-	int i;
-
-	int coins;
-	//int choice1, choice2, choice3;
-	int curPlayer;
+	int card, checkSame, players, seed, x, i, coins, curPlayer;
 	int curCard = 0;
 	int cardLocation;
 	char cardName[100];
@@ -40,12 +29,10 @@ int main(int argc, char *argv[]){
 		seed = 42;
 	}
 
-	// Random Kingdom Cards (10)
 	checkSame = 0;
 	for(int i = 0; i < 10; i++){
 		// Find random card between adventurer and treasure_map
 		card = rand() % 20 + adventurer;
-		// duplicate check
 		for(int j = 0; j < i; j++){
 			if(card == k[j]){
 				checkSame = 1;
@@ -63,30 +50,25 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("--------- BEGIN GAME ---------\n");
-	// Print kingdom cards
 	printf("Here are the kindom cards: \n");
 	for(int i = 0; i < 10; i++){
 		cardNumToName(k[i], cardName);
 		printf("%s\n", cardName);
 	}
 
-	// Random number of players
+	// Between 2-4 players
 	players = (rand() % 3) + 2;
 	state->numPlayers = players;
 
-	// Init game
 	x = initializeGame(players, k, seed, state);
 	if(x == -1)
 		printf("Initialize game failed\n");
 
-	// Continue Playing while game is not over
 	while(!isGameOver(state)){
-		// get current player number
 		curPlayer = state->whoseTurn;
 		printf("--- Starting turn for player: %d ---\n", curPlayer);
 		cardLocation = 0;
 
-		// Check for an action card
 		// Avoid feast and tribute infinite loop
 		actionCard = 0;
 		for(i = 0; i < numHandCards(state); i++){
@@ -98,27 +80,19 @@ int main(int argc, char *argv[]){
 		}
 
 		printf("Starting action phase\n");
-		// While there are actions, continue turn for action phase
 		while(state->numActions > 0 && actionCard != 0){
 			curCard = handCard(i, state);
 			cardNumToName(curCard, cardName);
 
-			//choice1 = rand() % state->handCount[curPlayer];
-			//choice2 = rand() % sea_hag;
-			//choice3 = rand() % sea_hag;
-
 			x = playCard(actionCard, -1, -1, -1, state);
 
-			// Discard if not valid action card
 			if(x == -1){
-				//printf("Cannot play card: %s\n", cardName);
 				discardCard(cardLocation, curPlayer, state, 0);
 			}
 			else{
 				printf("Played card: %s, %d\n", cardName, curCard);
 			}
 
-			// Make sure we still have actions
 			if(state->numActions <= 0){
 				printf("All actions used, action phase over\n");
 				break;
@@ -136,9 +110,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 
-		// Buy phase
 		printf("Buy Phase\n");
-		// check for coin cards
 		coins = 0;
 		for(i = 0; i < numHandCards(state); i++){
 			if(handCard(i, state) == copper)
@@ -154,7 +126,6 @@ int main(int argc, char *argv[]){
 				x = rand() % 2;
 				cardLocation = rand() % 10;
 
-				// random chance of buying either a kingdom card or a action card
 				if(x)
 					card = k[cardLocation];
 				else
@@ -165,12 +136,10 @@ int main(int argc, char *argv[]){
 			printf("Buying card: %s\n", cardName);
 		}
 		printf("Buy Phase over\n");
-		// Cleanup
-		printf("Clean up turn\n");
+		printf("End turn\n");
 		endTurn(state);
 	}
 
-	// Find out who won the game
 	getWinners(getWin, state);
 	printf("\n -------- SCOREBOARD --------\n\n");
 	int winnerPlayer;
@@ -178,7 +147,6 @@ int main(int argc, char *argv[]){
 		printf("Player %d has a score of: %d\n", i, scoreFor(i, state));
 		if(getWin[i] == 1){
 			winnerPlayer = i;
-			//break;
 		}
 	}
 

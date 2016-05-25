@@ -15,15 +15,14 @@
 < winner: 0
 < Final score: 44
 
-For this assignment, I compared my code with Ramcharan's dominion implementation. 
-Everytime that diffdominion was used to compare his code with mine, the dominion code almost always did not behave identically. 
-For example, in the diff used above, my implementation had both negative and positive scores, whereas his implementation only produced positive scores.
-It is difficult to determine which implementation is correct.
-An error that I found for both of our implementations is that it could result in an infinite loop.
-This makes it hard to tell who has the correct implementation.
+For this assignment, I compared my code with Ramcharan's dominion implementation. Everytime that diffdominion was used to compare his 
+code with mine, the dominion code almost always did not behave identically. For example, in the diff used above, my implementation had 
+both negative and positive scores, whereas his implementation only produced positive scores. It is difficult to determine which 
+implementation is correct. An error that I found for both of our implementations is that it could result in an infinite loop.This makes 
+it hard to tell who has the correct implementation.
 
-This is not an ideal case for differential testing because we both have different implementations to test a random dominion game.
-For his implementation, he could get a highscore of 141, but my implementation does not go past 20 points.
-I was also able to achieve a test coverage of 70.92%, when running the tester for more than 20 times, and when I ran the coverage for his code, it was 25.13%. 
-When he ran his test coverage on his own system, he was able to achieve somewhere around 70% test coverage.
-I was not able to figure out why this error is occuring.
+This is not an ideal case for differential testing because we both have different implementations to test a random dominion game. For 
+his implementation, he could get a highscore of 141, but my implementation does not go past 20 points. I was also able to achieve a 
+test coverage of 70.92%, when running the tester for more than 20 times, and when I ran the coverage for his code, it was 25.13%. When 
+he ran his test coverage on his own system, he was able to achieve somewhere around 70% test coverage. I was not able to figure out 
+why this error is occuring.

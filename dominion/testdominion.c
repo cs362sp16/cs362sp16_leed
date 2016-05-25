@@ -1,11 +1,11 @@
-#include "dominion.h"
-#include "rngs.h"
-#include "interface.h"
-
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
+#include "dominion.h"
+#include "rngs.h"
+#include "interface.h"
+
 
 int main(int argc, char *argv[]){
 	time_t t;
@@ -26,13 +26,14 @@ int main(int argc, char *argv[]){
 		seed = atoi(argv[1]);
 	}
 	else{
-		seed = 42;
+		seed = rand();
 	}
 
 	checkSame = 0;
 	for(int i = 0; i < 10; i++){
 		// Find random card between adventurer and treasure_map
-		card = rand() % 20 + adventurer;
+		card = (rand() % 20) + adventurer;
+		//floor(Random() * 20)+ adventurer;
 		for(int j = 0; j < i; j++){
 			if(card == k[j]){
 				checkSame = 1;
@@ -58,6 +59,7 @@ int main(int argc, char *argv[]){
 
 	// Between 2-4 players
 	players = (rand() % 3) + 2;
+	//floor(Random() * 3) + 2;
 	state->numPlayers = players;
 
 	x = initializeGame(players, k, seed, state);
@@ -144,13 +146,13 @@ int main(int argc, char *argv[]){
 	printf("\n -------- SCOREBOARD --------\n\n");
 	int winnerPlayer;
 	for(i = 0; i < state->numPlayers; i++){
-		printf("Player %d has a score of: %d\n", i, scoreFor(i, state));
+		printf("Final Player %d has a score of: %d\n", i, scoreFor(i, state));
 		if(getWin[i] == 1){
 			winnerPlayer = i;
 		}
 	}
 
 	printf("\nThe winner is player: %d\n", winnerPlayer);
-	printf("Their score was: %d\n", scoreFor(winnerPlayer, state));
+	printf("Their Final score was: %d\n", scoreFor(winnerPlayer, state));
 	printf("Game Over\n\n");
 }

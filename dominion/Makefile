@@ -60,6 +60,8 @@ unittestresults.out: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2
 testdominion: testdominion.c dominion.o
 	gcc -o testdominion testdominion.c dominion.o rngs.o interface.o -g -fprofile-arcs -ftest-coverage -Wall -fpic -coverage -lm -std=c99
 	testdominion 42
+	testdominion
+	testdominion
 	gcov -f dominion.c > testdominion.out
 
 randomtestadventurer.out: randomtestadventurer.c dominion.o

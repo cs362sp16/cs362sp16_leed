@@ -5,16 +5,16 @@ Function 'gainCard'
 Lines executed:61.54% of 13
 
 Function 'discardCard'
-Lines executed:100.00% of 13
+Lines executed:92.31% of 13
 
 Function 'cardEffect'
-Lines executed:44.17% of 163
+Lines executed:34.36% of 163
 
 Function 'mineCardEffect'
-Lines executed:41.67% of 12
+Lines executed:0.00% of 12
 
 Function 'validMineCardEffect'
-Lines executed:75.00% of 12
+Lines executed:0.00% of 12
 
 Function 'baronCardEffect'
 Lines executed:78.26% of 23
@@ -35,7 +35,7 @@ Function 'gainEstateCard'
 Lines executed:0.00% of 6
 
 Function 'getCost'
-Lines executed:100.00% of 30
+Lines executed:86.67% of 30
 
 Function 'drawCard'
 Lines executed:100.00% of 22
@@ -56,7 +56,7 @@ Function 'whoseTurn'
 Lines executed:100.00% of 2
 
 Function 'fullDeckCount'
-Lines executed:100.00% of 9
+Lines executed:0.00% of 9
 
 Function 'supplyCount'
 Lines executed:100.00% of 2
@@ -92,6 +92,6 @@ Function 'customHand'
 Lines executed:100.00% of 4
 
 File 'dominion.c'
-Lines executed:72.28% of 588
+Lines executed:64.80% of 588
 Creating 'dominion.c.gcov'
 

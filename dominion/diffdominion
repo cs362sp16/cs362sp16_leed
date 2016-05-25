@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if [ $# -eq 3 ]; then
+	echo "----- diffdominion -----"
+	if [ -e $1 ]
+	then
+		echo "Directory 1 exists"
+
+		echo $PWD
+		cd $1
+		make all
+		gcov dominion.c > example1.txt
+		testdominion $3 | grep "winner\|Final" >> example1.txt
+		mv example1.txt ~
+		cd ~
+	else
+		echo "Directory 1 does not exist"
+	fi
+	if [ -e $2 ]
+	then
+		echo "Directory 2 exists"
+
+		cd $2
+		make all
+		testdominion $3 | grep "winner\|Final" > example2.txt
+		gcov dominion.c >> example2.txt
+		mv example2.txt ~
+		cd ~
+		#echo $PWD
+		diff example1.txt example2.txt > differential.txt
+		if [ ! -s differential.txt ]
+		then
+			echo "TEST PASSED"
+		else
+			echo "TEST FAILED"
+		fi
+	else
+		echo "Directory 2 does not exist"
+	fi
+	
+else
+	echo "Usage: diffdominion <directory1> <directory2> <random seed>"
+fi

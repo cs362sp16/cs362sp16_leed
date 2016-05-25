@@ -23,6 +23,6 @@ it hard to tell who has the correct implementation.
 
 This is not an ideal case for differential testing because we both have different implementations to test a random dominion game. For 
 his implementation, he could get a highscore of 141, but my implementation does not go past 20 points. I was also able to achieve a 
-test coverage of 70.92%, when running the tester for more than 20 times, and when I ran the coverage for his code, it was 25.13%. When 
+test coverage of 70.92%, when running the tester for more than 20 times, and when I ran the coverage for his code, it was 25.13%. When
 he ran his test coverage on his own system, he was able to achieve somewhere around 70% test coverage. I was not able to figure out 
-why this error is occuring.
+why this error was occuring. 

@@ -1,0 +1,6 @@
+I was testing Ramcharan's unit tests and found a bug in one of the 
+card implementations. For his cardtest1.c, he tested the smithy card,
+which had the bug. The smithy card is supposed to add 3 cards to
+the user's hand, but 4 cards were added to the user's hand. When 
+looking at his dominion.c code, I noticed that his for loop to give
+3 cards had an extra iteration that gives the user an extra card.

@@ -1,0 +1,5 @@
+Another bug that I found in Ramcharan's code was in a card implementation.
+The salvager card is supposed to give the player an extra buy and also
+trash a card from their hand that is equal to its cost. His implementation
+in dominion.c does not give the player an additional buy, but the 
+other functionality is there. 

@@ -1,0 +1,21 @@
+Introduction
+	In order to identify and fix a bug in my own code, I decided to try importing someone else's random tester that plays a full 
+game of Dominion. The reason behind this was to find a bug and apply one of Agans' principles, which is make it fail. This random 
+tester is in my directory of dominion called otherDominionTester.c. 
+
+Finding the Bug
+	When I ran their code, I noticed that the program would often halt at random times and fail play the full game of dominion. 
+I ran the code a couple of more times to see how often this bug occured in order to determine the severity of the bug. After a few 
+more runs, the halt occured too frequently. 
+
+Solving the Bug
+	To solve this issue, I applied another one of Agans' principles, which was to understand the system. In this case, the system 
+was one of my classmates' code. I looked through the code and made sure I understood what the program was doing and how it was being 
+run. Then I was able to use GDB to localize the bug. I first started by adding the debugging flags when compiling the program and then 
+I was able to run GDB. After running GDB, I hit Ctrl-C to exit the halted program and was able execute the backtrace command. I noticed 
+in the backtrace that the program stopped in the cardEffect function in dominion.c. Another one of Agans' principles was used here, 
+where I only changed one thing at a time. To determine where in cardEffect it was halting, I added a print test statement to the code to 
+see which card was causing the problem. It turned out to be the Feast card. To make sure that feast was implemented correctly, I made 
+sure that I fully knew what the feast card effect was. After examining the code, I noticed that there was an infinite while loop. The 
+conditional x variable that keeps the while loop running was not being changed at all unless it hit one if statement. I was able to fix 
+this by adding an exit condition where x was being set to 0, so that the while loop could be exited

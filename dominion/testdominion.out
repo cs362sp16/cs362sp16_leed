@@ -8,16 +8,16 @@ Function 'discardCard'
 Lines executed:92.31% of 13
 
 Function 'cardEffect'
-Lines executed:34.36% of 163
+Lines executed:25.77% of 163
 
 Function 'mineCardEffect'
-Lines executed:0.00% of 12
+Lines executed:41.67% of 12
 
 Function 'validMineCardEffect'
-Lines executed:0.00% of 12
+Lines executed:75.00% of 12
 
 Function 'baronCardEffect'
-Lines executed:78.26% of 23
+Lines executed:0.00% of 23
 
 Function 'smithyCardEffect'
 Lines executed:100.00% of 6
@@ -26,16 +26,16 @@ Function 'adventurerCardEffect'
 Lines executed:64.71% of 17
 
 Function 'ambassadorCardEffect'
-Lines executed:31.25% of 16
+Lines executed:0.00% of 16
 
 Function 'validAmbassadorEffect'
-Lines executed:41.18% of 17
+Lines executed:0.00% of 17
 
 Function 'gainEstateCard'
 Lines executed:0.00% of 6
 
 Function 'getCost'
-Lines executed:86.67% of 30
+Lines executed:66.67% of 30
 
 Function 'drawCard'
 Lines executed:100.00% of 22
@@ -77,7 +77,7 @@ Function 'shuffle'
 Lines executed:100.00% of 16
 
 Function 'initializeGame'
-Lines executed:98.39% of 62
+Lines executed:96.77% of 62
 
 Function 'kingdomCards'
 Lines executed:0.00% of 13
@@ -92,6 +92,6 @@ Function 'customHand'
 Lines executed:100.00% of 4
 
 File 'dominion.c'
-Lines executed:64.80% of 588
+Lines executed:58.50% of 588
 Creating 'dominion.c.gcov'
 

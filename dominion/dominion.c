@@ -734,7 +734,6 @@ int adventurerCardEffect(struct gameState *state, int currentPlayer){
 		}
 		else{
 			temphand[z]=cardDrawn;
-	  		state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
 	  		z++;
 		}
       }
@@ -870,9 +869,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	{
 	  drawCard(currentPlayer, state);
 	}
-			
-      //+1 Buy
-      state->numBuys++;
 			
       //Each other player draws a card
       for (i = 0; i < state->numPlayers; i++)

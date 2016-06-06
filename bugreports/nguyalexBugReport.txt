@@ -1,5 +1,5 @@
-When using Alex's random testers for the whole game, I noticed one bug
-that a lot of people had in their dominion.c code. The feast card has
-an infinite loop when trying to buy one card. Unless the player can get 
-past the error checks, then an infinite loop can occur as the condition
-for the while loop will never change, thus an infinite loop occurs.
+When using Alex's random testers for the whole game, I noticed one bug that a lot of people had in their dominion.c code. 
+The feast card has an infinite loop when trying to buy one card. Unless the player can get past the error checks, then an 
+infinite loop can occur as the condition for the while loop will never change, thus an infinite loop occurs. This is a 
+high priority and severity bug as it can halt the game if the feast card is ever called. The solution to this problem
+is to add an exit condition that lets the while loop, that causes the infinite loop, to be exited.

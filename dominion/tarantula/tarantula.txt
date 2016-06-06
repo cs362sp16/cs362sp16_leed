@@ -1,0 +1,5 @@
+	For my tarantula script, I was able to get a majority of the code from Google and Github. To run the script, you need to have a tests.txt file for the script to parse through. The format of tests.txt should be as follows
+
+testName	testName.gcov	pass/fail
+
+This parses through the gcov file and uses the tarantula formula to calculate the suspiciousness of the localized bug. One error that I found using the tarantula script was the adventurer card, which is not able to catch an error. As the function/switch case always returns 0, it would be hard to catch an error if it did occur. Tarantula also helped me find another bug inside adventurer, which was discarding the card after using it. In my current dominion code, the adventurer card never gets discarded, so the user always has an adventurer card in their hand.

@@ -1,0 +1,5 @@
+unittest1     unittest1.gcov        fail
+testdominion  testdominion.gcov	    fail
+unittest2     unittest2.gcov        pass
+unittest3     unittest3.gcov        pass	
+unittest4     unittest4.gcov        pass
